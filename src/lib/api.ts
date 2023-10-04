@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
 import type { SendOptions } from "./types";
+import { dev } from "$app/environment";
 
-const PROD = false;
-const base = PROD ? "https://akifisitan-dev-api.vercel.app" : "http://localhost:8000";
+const base = !dev ? "https://akifisitan-dev-api.vercel.app" : "http://localhost:8000";
 
 async function send(
 	fetch: typeof globalThis.fetch,

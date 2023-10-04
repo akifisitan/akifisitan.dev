@@ -27,7 +27,4 @@
 			href="/su/course-spotter">Course Spotter</a
 		>
 	</div>
-	<div>
-		<Plus class="w-10 h-10" />
-	</div>
 </div>

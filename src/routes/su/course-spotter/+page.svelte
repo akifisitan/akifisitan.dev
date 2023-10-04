@@ -46,7 +46,7 @@
 		loading = true;
 		const timeout = setTimeout(() => {
 			btnLoading = true;
-		}, 40);
+		}, 100);
 		query = "";
 		const errors = validate();
 		if (errors.length > 0) {

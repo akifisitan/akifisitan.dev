@@ -1,7 +1,8 @@
 import { error } from "@sveltejs/kit";
 import type { SendOptions } from "./types";
 
-const base = "http://localhost:8000";
+const PROD = false;
+const base = PROD ? "https://akifisitan-dev-api.vercel.app" : "http://localhost:8000";
 
 async function send(
 	fetch: typeof globalThis.fetch,
@@ -31,7 +32,7 @@ async function send(
 		const text = await response.text();
 
 		return { data: text ? JSON.parse(text) : null, status: response.status };
-	} catch (e: any) {
+	} catch (e) {
 		if (e.message === "fetch failed") {
 			throw error(503, { message: "Server is offline" });
 		}

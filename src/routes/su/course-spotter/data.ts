@@ -6,10 +6,15 @@ export const majorPrograms = [
 	["BSEE", "EE"],
 	["BSME", "ME"],
 	["BSMAT", "MAT"],
-	["BSBIO", "BIO"],
-	["BAECON", "ECON"],
-	["BAPSY", "PSY"],
-	["BAVACD", "VA"]
+	["BSBIO", "BIO"]
+];
+
+export const admitTerms = [
+	["202301", "Fall 2023-2024"],
+	["202201", "Fall 2022-2023"],
+	["202101", "Fall 2021-2022"],
+	["202001", "Fall 2020-2021"],
+	["201901", "Fall 2019-2020"]
 ];
 
 export const terms = [

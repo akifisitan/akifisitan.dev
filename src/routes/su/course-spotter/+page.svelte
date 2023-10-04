@@ -3,32 +3,33 @@
 	import * as Select from "$lib/components/ui/select";
 	import { Label } from "$lib/components/ui/label";
 	import { Button } from "$lib/components/ui/button";
-	import { Link } from "lucide-svelte";
+	import { Link, Frown } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
-	import { majorPrograms, terms, courseTypes, type CourseData } from "./data";
+	import { majorPrograms, admitTerms, courseTypes, type CourseData } from "./data";
 	import * as api from "$lib/api";
 	import { Toaster, toast } from "svelte-french-toast";
 
 	const currentTerm = "202301";
 	let loading = false;
+	let btnLoading = false;
 	let major = "";
-	let searchTerm = "";
+	let query = "";
 	let admitTerm = "";
 	let courseType = "";
 	let courses: CourseData[] = [];
 	let responseData: CourseData[] | null = null;
 
-	$: filterCourses(searchTerm);
+	$: filterCourses(query);
 
-	function filterCourses(searchTerm: string) {
+	function filterCourses(searchQuery: string) {
 		if (!responseData) return;
-		if (searchTerm.length === 0) {
+		if (searchQuery.length === 0) {
 			courses = responseData;
 			return;
 		}
-		if (searchTerm.length === 1) return;
+		if (searchQuery.length === 1) return;
 		courses = responseData.filter((course) => {
-			return course.code.toLowerCase().includes(searchTerm.toLowerCase());
+			return course.code.toLowerCase().includes(searchQuery.toLowerCase());
 		});
 	}
 
@@ -43,20 +44,23 @@
 	async function handleSubmit() {
 		if (loading) return;
 		loading = true;
-		searchTerm = "";
+		const timeout = setTimeout(() => {
+			btnLoading = true;
+		}, 40);
+		query = "";
 		const errors = validate();
 		if (errors.length > 0) {
 			toast.error(errors.join("\n"));
 			loading = false;
+			clearTimeout(timeout);
 			return;
 		}
-		const payload = {
-			program: major,
-			admit_term: admitTerm,
-			course_type: courseType
-		};
 		try {
-			const response = await api.post(fetch, "checkCourseAvailability", null, payload);
+			const response = await api.get(
+				fetch,
+				`courses/checkAvailability?program=${major}&admit_term=${admitTerm}&course_type=${courseType}`,
+				null
+			);
 			if (response.status === 200) {
 				responseData = courses = response.data;
 			} else {
@@ -66,12 +70,27 @@
 			console.log(e);
 			toast.error("An error ocurred while fetching data. Please try again later.");
 		} finally {
+			if (btnLoading === false) {
+				clearTimeout(timeout);
+			} else {
+				btnLoading = false;
+			}
 			loading = false;
 		}
 	}
 </script>
 
+<svelte:head>
+	<title>Course Spotter</title>
+</svelte:head>
+
 <Toaster />
+
+<h2
+	class="p-2 scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+>
+	Course Spotter
+</h2>
 
 <section class="flex flex-row">
 	<div class="side-bar">
@@ -106,7 +125,7 @@
 						<Select.Value placeholder="Select admit term" />
 					</Select.Trigger>
 					<Select.Content>
-						{#each terms as [code, name]}
+						{#each admitTerms as [code, name]}
 							<Select.Item value={code} label={name}>{name}</Select.Item>
 						{/each}
 					</Select.Content>
@@ -136,19 +155,19 @@
 			<Button
 				type="submit"
 				class="min-w-full"
-				variant={loading ? "destructive" : "default"}
+				variant={btnLoading ? "destructive" : "default"}
 			>
-				{loading ? "Searching..." : "Search"}
+				{btnLoading ? "Searching..." : "Search"}
 			</Button>
 		</form>
 		<!-- Result -->
 	</div>
 	<div class="w-full">
-		<div class="search-menu">
-			<Input type="search" bind:value={searchTerm} placeholder="Search for a course" />
-		</div>
-		<div class="course-display">
-			{#if responseData}
+		{#if responseData}
+			<div class="search-menu">
+				<Input type="search" bind:value={query} placeholder="Search for a course" />
+			</div>
+			<div class="course-display">
 				{#if courses.length > 0}
 					{#each courses as data}
 						<Card.Root class="max-h-32">
@@ -167,34 +186,16 @@
 									<p>Remaining: {data.remaining_capacity} / {data.total_capacity}</p>
 								</Card.Description>
 							</Card.Header>
-							<!-- <Card.Content>
-							<p>Remaining: {data.remaining_capacity} / {data.total_capacity}</p>
-						</Card.Content> -->
 						</Card.Root>
 					{/each}
 				{:else}
-					<p>No courses found matching criteria</p>
+					<div class="flex flex-col min-w-fit text-center">
+						<p class="pb-1 m-auto">No courses found matching criteria</p>
+						<Frown class="m-auto h-12 w-12" />
+					</div>
 				{/if}
-			{:else}
-				<Card.Root class="max-h-32">
-					<Card.Header>
-						<Card.Title
-							><p>
-								CS XXX - 0
-								<a class="inline-block" href="/su/ucourse"><Link class="w-4 h-4" /></a>
-							</p></Card.Title
-						>
-						<Card.Description>
-							<p>Remaining: 100 / 100</p>
-							<p>Fill in to see the results</p>
-						</Card.Description>
-					</Card.Header>
-					<!-- <Card.Content>
-			<p>Remaining: {data.remaining_capacity} / {data.total_capacity}</p>
-		</Card.Content> -->
-				</Card.Root>
-			{/if}
-		</div>
+			</div>
+		{/if}
 	</div>
 </section>
 

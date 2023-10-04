@@ -97,7 +97,9 @@
 			{/each}
 		{/if}
 	</div>
-	<SemesterTable bind:courses={semesters[currentSemester]} />
+	{#if semesters[currentSemester]}
+		<SemesterTable bind:courses={semesters[currentSemester]} />
+	{/if}
 </div>
 
 <style>

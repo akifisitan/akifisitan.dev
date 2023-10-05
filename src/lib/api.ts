@@ -2,7 +2,10 @@ import { error } from "@sveltejs/kit";
 import type { SendOptions } from "./types";
 import { dev } from "$app/environment";
 
-const base = !dev ? "https://akifisitan-dev-api.vercel.app" : "http://localhost:8000";
+const heroku = "https://akifisitan-dev-api-32303c0d743b.herokuapp.com";
+// const vercel = "https://akifisitan-dev-api.vercel.app";
+const localhost = "http://localhost:8000";
+const base = !dev ? localhost : heroku;
 
 async function send(
 	fetch: typeof globalThis.fetch,

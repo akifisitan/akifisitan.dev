@@ -1,3 +1,5 @@
+export const currentTerm = "202301";
+
 export const courseTypes = ["Required", "University", "Core", "Area", "Free"];
 
 export const majorPrograms = [

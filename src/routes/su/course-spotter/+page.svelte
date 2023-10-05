@@ -5,11 +5,10 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Link, Frown } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
-	import { majorPrograms, admitTerms, courseTypes, type CourseData } from "./data";
+	import { currentTerm, majorPrograms, admitTerms, courseTypes, type CourseData } from "./data";
 	import * as api from "$lib/api";
 	import { Toaster, toast } from "svelte-french-toast";
 
-	const currentTerm = "202301";
 	let loading = false;
 	let btnLoading = false;
 	let major = "";
@@ -46,7 +45,7 @@
 		loading = true;
 		const timeout = setTimeout(() => {
 			btnLoading = true;
-		}, 100);
+		}, 50);
 		query = "";
 		const errors = validate();
 		if (errors.length > 0) {

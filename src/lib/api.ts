@@ -5,7 +5,7 @@ import { dev } from "$app/environment";
 const heroku = "https://akifisitan-dev-api-32303c0d743b.herokuapp.com";
 // const vercel = "https://akifisitan-dev-api.vercel.app";
 const localhost = "http://localhost:8000";
-const base = !dev ? localhost : heroku;
+const base = dev ? localhost : heroku;
 
 async function send(
 	fetch: typeof globalThis.fetch,

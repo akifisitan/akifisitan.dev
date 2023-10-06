@@ -27,5 +27,9 @@
 			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
 			href="/su/course-spotter">Course Spotter</a
 		>
+		<a
+			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
+			href="/su/clash-checker">Clash Checker</a
+		>
 	</div>
 </div>

@@ -5,7 +5,13 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Link, Frown } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
-	import { currentTerm, majorPrograms, admitTerms, courseTypes, type CourseData } from "./data";
+	import {
+		currentTerm,
+		majorPrograms,
+		admitTerms,
+		courseTypes,
+		type CourseData
+	} from "./data";
 	import * as api from "$lib/api";
 	import { Toaster, toast } from "svelte-french-toast";
 
@@ -86,12 +92,12 @@
 <Toaster />
 
 <h2
-	class="p-2 scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+	class="p-2 text-center scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0 sm:text-start sm:pl-4"
 >
 	Course Spotter
 </h2>
 
-<section class="flex flex-row">
+<section class="flex flex-col items-center sm:flex-row sm:items-stretch">
 	<div class="side-bar">
 		<form on:submit|preventDefault={handleSubmit} class="max-w-xs">
 			<!-- Major Program -->
@@ -166,8 +172,8 @@
 			<div class="search-menu">
 				<Input type="search" bind:value={query} placeholder="Search for a course" />
 			</div>
-			<div class="course-display">
-				{#if courses.length > 0}
+			{#if courses.length > 0}
+				<div class="course-display">
 					{#each courses as data}
 						<Card.Root class="max-h-32">
 							<Card.Header>
@@ -187,13 +193,13 @@
 							</Card.Header>
 						</Card.Root>
 					{/each}
-				{:else}
-					<div class="flex flex-col min-w-fit text-center">
-						<p class="pb-1 m-auto">No courses found matching criteria</p>
-						<Frown class="m-auto h-12 w-12" />
-					</div>
-				{/if}
-			</div>
+				</div>
+			{:else}
+				<div class="flex pt-4 flex-col min-w-fit w-full text-center">
+					<p class="pb-1 m-auto">No courses found</p>
+					<Frown class="m-auto h-12 w-12" />
+				</div>
+			{/if}
 		{/if}
 	</div>
 </section>

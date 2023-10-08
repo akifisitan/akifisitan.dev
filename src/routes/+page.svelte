@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Plus } from "lucide-svelte";
+	import { Linkedin, Github, FileText } from "lucide-svelte";
 	const interests: string[] = [
 		"software development",
 		"web development",
@@ -31,5 +31,14 @@
 			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
 			href="/su/clash-checker">Clash Checker</a
 		>
+	</div>
+	<div class="flex flex-row p-4">
+		<a class="p-2" href="https://github.com/akifisitan" target="_blank"
+			><Github class="w-6 h-6" /></a
+		>
+		<a class="p-2" href="https://linkedin.com/in/akifisitan" target="_blank"
+			><Linkedin class="w-6 h-6" /></a
+		>
+		<a class="p-2" href="/files/cv"><FileText class="w-6 h-6" /></a>
 	</div>
 </div>

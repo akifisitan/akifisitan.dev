@@ -175,7 +175,7 @@
 			{#if courses.length > 0}
 				<div class="course-display">
 					{#each courses as data}
-						<Card.Root class="max-h-32">
+						<Card.Root class="max-h-32 text-center">
 							<Card.Header>
 								<Card.Title
 									><p>
@@ -212,7 +212,7 @@
 		display: grid;
 		padding: 1rem;
 		gap: 1rem;
-		grid-template-columns: repeat(auto-fill, minmax(12rem, 0.7fr));
+		grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
 	}
 	.side-bar {
 		display: flex;

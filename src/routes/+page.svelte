@@ -39,6 +39,6 @@
 		<a class="p-2" href="https://linkedin.com/in/akifisitan" target="_blank"
 			><Linkedin class="w-6 h-6" /></a
 		>
-		<a class="p-2" href="/files/cv" target="_blank"><FileText class="w-6 h-6" /></a>
+		<!-- <a class="p-2" href="/files/cv" target="_blank"><FileText class="w-6 h-6" /></a> -->
 	</div>
 </div>

@@ -5,6 +5,8 @@
 	import { Textarea } from "$lib/components/ui/textarea";
 	import * as Dialog from "$lib/components/ui/dialog";
 	import { onMount } from "svelte";
+	import { fade, fly } from "svelte/transition";
+	import { Toaster, toast } from "svelte-french-toast";
 
 	let scheduleTable = createScheduleTable();
 	let loaded = false;
@@ -45,15 +47,32 @@
 	}
 
 	function handleImport() {
-		if (importData.length === 0 || profileName.length === 0) return;
+		if (profileName.length === 0 || profileName.length > 20) {
+			toast.error("Profile name must be between 1 and 20 characters");
+			return;
+		}
+		if (importData.length === 0) {
+			toast.error("Import data cannot be empty");
+			return;
+		}
 		const lines = importData.split("\n");
 		const crns = [];
 		for (let i = 0; i < lines.length; i++) {
-			const crn = lines[i].split(":")[1].trimStart();
-			crns.push(crn);
-			assignCrnToSlots(crn);
+			const crn = lines[i].includes(":")
+				? lines[i].split(":")[1].trimStart()
+				: lines[i].trim();
+			const courseExists = courseMap[crn];
+			if (courseExists) {
+				crns.push(crn);
+				assignCrnToSlots(crn);
+			}
+		}
+		if (crns.length === 0) {
+			toast.error("No valid CRNs found in import data");
+			return;
 		}
 		profiles[profileName] = { crns, active: true };
+		toast.success(`Successfully imported ${crns.length} CRNs`);
 		importData = "";
 		profileName = "";
 		importDialogIsOpen = false;
@@ -71,6 +90,8 @@
 <svelte:head>
 	<title>Clash Checker</title>
 </svelte:head>
+
+<Toaster />
 
 <div class="flex flex-row">
 	<div class="flex flex-col p-8">
@@ -139,7 +160,9 @@
 			{#each Object.keys(profiles) as profileName}
 				<Button
 					variant="outline"
-					class={profiles[profileName].active ? "bg-green-700" : "bg-red-700"}
+					class={profiles[profileName].active
+						? "bg-green-800 hover:bg-green-700"
+						: "bg-red-800 hover:bg-red-700"}
 					on:click={() => {
 						profiles[profileName].active = !profiles[profileName].active;
 					}}
@@ -164,12 +187,14 @@
 						<td class="pr-4 text-right">{i < 2 ? `0${8 + i}.40` : `${8 + i}.40`}</td>
 						{#each row as _, j}
 							<td
-								class="cell"
+								class="w-[2.5rem] h-[2.5rem] min-w-[10rem] min-h-[2.5rem] border-[2px]"
 								class:bg-red-700={scheduleTable[i][j].length > 1}
 								class:bg-emerald-700={scheduleTable[i][j].length == 0}
 							>
 								{#each scheduleTable[i][j] as courseCode}
-									<p class="text-center">{courseCode}</p>
+									<p class="text-center">
+										{courseCode}
+									</p>
 								{/each}
 							</td>
 						{/each}
@@ -179,13 +204,3 @@
 		</table>
 	</div>
 </div>
-
-<style>
-	.cell {
-		border-width: 2px;
-		width: 2.5rem;
-		min-width: 10rem;
-		height: 2.5rem;
-		min-height: 2.5rem;
-	}
-</style>

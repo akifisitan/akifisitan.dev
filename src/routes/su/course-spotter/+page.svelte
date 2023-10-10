@@ -5,6 +5,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Link, Frown } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
+	import { Slider } from "$lib/components/ui/slider";
 	import {
 		currentTerm,
 		majorPrograms,
@@ -19,14 +20,28 @@
 	let btnLoading = false;
 	let major = "";
 	let query = "";
+	let queryCapacity: number = 0;
 	let admitTerm = "";
 	let courseType = "";
 	let courses: CourseData[] = [];
 	let responseData: CourseData[] | null = null;
 
-	$: filterCourses(query);
+	$: filterQuery(query);
+	$: filterCapacity(queryCapacity);
 
-	function filterCourses(searchQuery: string) {
+	function filterCapacity(queryCapacity: number) {
+		if (!responseData) return;
+		courses = responseData.filter((course) => {
+			if (query) {
+				return (
+					course.remaining_capacity >= queryCapacity &&
+					course.code.toLowerCase().includes(query.toLowerCase())
+				);
+			} else return course.remaining_capacity >= queryCapacity;
+		});
+	}
+
+	function filterQuery(searchQuery: string) {
 		if (!responseData) return;
 		if (searchQuery.length === 0) {
 			courses = responseData;
@@ -34,7 +49,10 @@
 		}
 		if (searchQuery.length === 1) return;
 		courses = responseData.filter((course) => {
-			return course.code.toLowerCase().includes(searchQuery.toLowerCase());
+			return (
+				course.remaining_capacity >= queryCapacity &&
+				course.code.toLowerCase().includes(searchQuery.toLowerCase())
+			);
 		});
 	}
 
@@ -171,6 +189,16 @@
 		{#if responseData}
 			<div class="search-menu">
 				<Input type="search" bind:value={query} placeholder="Search for a course" />
+				<Label>Capacity</Label><Slider
+					class="inline-flex py-2 mx-4 w-[10rem]"
+					onValueChange={(e) => {
+						queryCapacity = e?.at(0) ?? 0;
+					}}
+					value={[0]}
+					max={300}
+					step={5}
+				/>
+				<p class="inline-flex">{queryCapacity}</p>
 			</div>
 			{#if courses.length > 0}
 				<div class="course-display">

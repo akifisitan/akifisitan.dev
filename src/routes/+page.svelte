@@ -33,11 +33,15 @@
 		>
 	</div>
 	<div class="flex flex-row p-4">
-		<a class="p-2" href="https://github.com/akifisitan" target="_blank"
-			><Github class="w-6 h-6" /></a
+		<a
+			class="m-2 border-[3px] border-gray-600 rounded-sm"
+			href="https://github.com/akifisitan"
+			target="_blank"><Github class="bg-gray-600 hover:text-gray-900" /></a
 		>
-		<a class="p-2" href="https://linkedin.com/in/akifisitan" target="_blank"
-			><Linkedin class="w-6 h-6" /></a
+		<a
+			class="m-2 border-[3px] border-blue-500 rounded-sm"
+			href="https://linkedin.com/in/akifisitan"
+			target="_blank"><Linkedin class="bg-blue-500 hover:text-blue-900" /></a
 		>
 		<!-- <a class="p-2" href="/files/cv" target="_blank"><FileText class="w-6 h-6" /></a> -->
 	</div>

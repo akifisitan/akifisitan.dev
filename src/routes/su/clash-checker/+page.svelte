@@ -93,7 +93,7 @@
 
 <Toaster />
 
-<div class="flex flex-row">
+<div class="flex flex-row overflow-scroll">
 	<div class="flex flex-col p-8">
 		<Dialog.Root
 			onOpenChange={() => {
@@ -105,17 +105,19 @@
 			<Dialog.Trigger class={`my-2 ${buttonVariants({ variant: "outline" })}`}>
 				Import
 			</Dialog.Trigger>
-			<Dialog.Content class="sm:max-w-[30rem]">
+			<Dialog.Content class="max-w-[18rem] sm:max-w-[30rem]">
 				<Dialog.Header>
 					<Dialog.Title>Import</Dialog.Title>
-					<Dialog.Description>Add import data.</Dialog.Description>
+					<Dialog.Description
+						>Import course data from SUChedule or manually. Add one CRN per line</Dialog.Description
+					>
 				</Dialog.Header>
 				<div class="grid gap-4 py-4">
 					<div class="grid grid-cols-4 items-center gap-4">
 						<Input
 							placeholder="Enter profile name"
 							bind:value={profileName}
-							class="col-span-2"
+							class="col-span-4 sm:col-span-2"
 						/>
 						<Textarea
 							placeholder="Enter data"

@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import SemesterTable from "./SemesterTable.svelte";
+	import { Trash2 } from "lucide-svelte";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import * as Dialog from "$lib/components/ui/dialog";
 	import * as Select from "$lib/components/ui/select";
+	import { Label } from "$lib/components/ui/label";
+	import { fade } from "svelte/transition";
 	import {
 		calculateCumulativeGpa,
 		type Course,
@@ -91,44 +94,30 @@
 </svelte:head>
 
 <div class="p-4">
-	<Select.Root
-		selected={{ value: "default", label: "default" }}
-		onSelectedChange={(e) => {
-			switchProfile(e?.value);
-		}}
-	>
-		<Select.Trigger class="w-[10rem] inline-flex">
-			<Select.Value />
-		</Select.Trigger>
-		<Select.Content>
-			{#each Object.keys(profiles) as profile}
-				<Select.Item value={profile}>{profile}</Select.Item>
-			{/each}
-		</Select.Content>
-	</Select.Root>
-	<Button variant="outline" class="inline-flex" on:click={addProfile}>Add Profile</Button>
-	<Button variant="outline" class="inline-flex" on:click={deleteProfile}
-		>Delete Profile</Button
-	>
 	<div>
-		<p class="">
-			Cumulative GPA: {cumulativeGpa} | GPA Credits: {gpaCredits} | Attempted Credits: {attemptedCredits}
-		</p>
-		<Button
-			variant="outline"
-			on:click={() => {
-				semesters.push([{ name: "", grade: "A", credits: 3 }]);
-				semesters = semesters;
-				currentSemester = semesters.length - 1;
-			}}>Add Semester</Button
+		<Label>Current Profile</Label>
+		<Select.Root
+			selected={{ value: "default", label: "default" }}
+			onSelectedChange={(e) => {
+				switchProfile(e?.value);
+			}}
 		>
-		<Button
-			variant="outline"
-			on:click={() => {
-				semesters.splice(currentSemester, 1);
-				if (currentSemester !== 0) currentSemester = currentSemester - 1;
-				semesters = semesters;
-			}}>Delete Semester</Button
+			<Select.Trigger class="w-[10rem] inline-flex">
+				<Select.Value />
+			</Select.Trigger>
+			<Select.Content>
+				{#each Object.keys(profiles) as profile}
+					<Select.Item value={profile}>{profile}</Select.Item>
+				{/each}
+			</Select.Content>
+		</Select.Root>
+	</div>
+	<div>
+		<Button variant="outline" class="inline-flex" on:click={addProfile}
+			>Add Profile</Button
+		>
+		<Button variant="outline" class="inline-flex" on:click={deleteProfile}
+			>Delete Profile</Button
 		>
 		<Dialog.Root
 			onOpenChange={() => {
@@ -191,19 +180,47 @@
 				</Dialog.Footer>
 			</Dialog.Content>
 		</Dialog.Root>
+	</div>
+	<div>
+		<p class="">
+			Cumulative GPA: {cumulativeGpa} | GPA Credits: {gpaCredits} | Attempted Credits: {attemptedCredits}
+		</p>
+		<Button
+			variant="outline"
+			on:click={() => {
+				semesters.push([{ name: "", grade: "A", credits: 3 }]);
+				semesters = semesters;
+				currentSemester = semesters.length - 1;
+			}}>Add Semester</Button
+		>
+		<Button
+			variant="outline"
+			on:click={() => {
+				semesters.splice(currentSemester, 1);
+				if (currentSemester !== 0) currentSemester = currentSemester - 1;
+				semesters = semesters;
+			}}>Delete Semester</Button
+		>
+
 		{#if semesters}
 			<div>
-				{#each semesters as _, index}
-					<Button
-						class="mx-1"
-						variant={currentSemester === index ? "default" : "outline"}
-						on:click={() => {
-							currentSemester = index;
-						}}>{index}</Button
-					>
-				{/each}
+				<ul>
+					{#each semesters as _, index}
+						<li class="inline-block px-1">
+							<Button
+								class="w-10"
+								variant={currentSemester === index ? "default" : "outline"}
+								on:click={() => {
+									currentSemester = index;
+								}}>{index}</Button
+							>
+						</li>
+					{/each}
+				</ul>
 				{#if semesters[currentSemester]}
-					<SemesterTable bind:courses={semesters[currentSemester]} />
+					{#key currentSemester}
+						<SemesterTable bind:courses={semesters[currentSemester]} />
+					{/key}
 				{/if}
 			</div>
 		{/if}

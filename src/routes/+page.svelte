@@ -16,21 +16,29 @@
 		<h1>Hey, I'm Akif</h1>
 	</div>
 	<div>
-		<p class="pb-2">
+		<p class="pb-2 text-center">
 			I am interested in <span class="text-violet-800">{interests[0]}</span>
 		</p>
-		<a
-			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
-			href="/su/gpa-calculator">GPA Calculator</a
-		>
-		<a
-			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
-			href="/su/course-spotter">Course Spotter</a
-		>
-		<a
-			class="border-[2px] border-gray-700 p-1 rounded-md hover:bg-gray-900"
-			href="/su/clash-checker">Clash Checker</a
-		>
+		<div class="flex flex-wrap gap-4">
+			<div class="min-w-fit">
+				<a
+					class="bg-rose-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
+					href="/su/gpa-calculator">GPA Calculator</a
+				>
+			</div>
+			<div class="min-w-fit">
+				<a
+					class="bg-emerald-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
+					href="/su/course-spotter">Course Spotter</a
+				>
+			</div>
+			<div class="min-w-fit">
+				<a
+					class="bg-sky-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
+					href="/su/clash-checker">Clash Checker</a
+				>
+			</div>
+		</div>
 	</div>
 	<div class="flex flex-row p-4">
 		<a

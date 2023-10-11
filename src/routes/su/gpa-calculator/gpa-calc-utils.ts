@@ -15,7 +15,7 @@ export const courseMap: Map<string, number> = new Map([
 	["U", 0.0]
 ]);
 
-export interface Course {
+export type Course = {
 	name: string;
 	grade: string;
 	credits: number;

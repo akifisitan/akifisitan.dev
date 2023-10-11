@@ -29,7 +29,7 @@ export const terms = [
 	["202001", "Fall 2020-2021"]
 ];
 
-export interface CourseData {
+export type CourseData = {
 	crn: string;
 	code: string;
 	section: string;

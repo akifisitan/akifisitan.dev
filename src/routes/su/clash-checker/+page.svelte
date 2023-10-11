@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createScheduleTable, courseMap, days } from "./data";
+	import { createScheduleTable, courseMap, days, type Profile } from "./data";
 	import { Input } from "$lib/components/ui/input";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Textarea } from "$lib/components/ui/textarea";
@@ -14,7 +14,9 @@
 	let confirmDialogIsOpen = false;
 	let profileName = "";
 	let importData = "";
-	let profiles: Record<string, any> = {};
+	let profiles: Record<string, Profile> = {};
+
+	const colors = ["red", "orange", "yellow", "emerald"];
 
 	$: if (loaded) {
 		refreshActiveProfiles(Object.keys(profiles));
@@ -47,12 +49,12 @@
 	}
 
 	function handleImport() {
-		if (profileName.length === 0 || profileName.length > 20) {
-			toast.error("Profile name must be between 1 and 20 characters");
+		if (profileName.length === 0 || profileName.length > 12) {
+			toast.error("Profile name must be between 1 and 12 characters");
 			return;
 		}
 		if (importData.length === 0) {
-			toast.error("Import data cannot be empty");
+			toast.error("Imported CRN data cannot be empty");
 			return;
 		}
 		const lines = importData.split("\n");
@@ -71,11 +73,18 @@
 			toast.error("No valid CRNs found in import data");
 			return;
 		}
-		profiles[profileName] = { crns, active: true };
+		const a = Object.keys(profiles).length;
+		profiles[profileName] = { crns: crns, active: true, color: colors[a] };
 		toast.success(`Successfully imported ${crns.length} CRNs`);
 		importData = "";
 		profileName = "";
 		importDialogIsOpen = false;
+	}
+
+	function handleClear() {
+		profiles = {};
+		toast.success("Successfully cleared all profiles");
+		confirmDialogIsOpen = false;
 	}
 
 	onMount(() => {
@@ -93,8 +102,9 @@
 
 <Toaster />
 
-<div class="flex flex-row overflow-scroll">
+<div class="flex flex-row overflow-auto min-h-[100vh]">
 	<div class="flex flex-col p-8">
+		<p class="text-center">Controls</p>
 		<Dialog.Root
 			onOpenChange={() => {
 				importData = "";
@@ -109,7 +119,7 @@
 				<Dialog.Header>
 					<Dialog.Title>Import</Dialog.Title>
 					<Dialog.Description
-						>Import course data from SUChedule or manually. Add one CRN per line</Dialog.Description
+						>Copy CRNs from SUChedule or add manually one CRN per line</Dialog.Description
 					>
 				</Dialog.Header>
 				<div class="grid gap-4 py-4">
@@ -122,7 +132,7 @@
 						<Textarea
 							placeholder="Enter data"
 							bind:value={importData}
-							class="resize-none col-span-4 h-32"
+							class="resize-none col-span-4 h-16 sm:h-32"
 						/>
 					</div>
 				</div>
@@ -132,25 +142,22 @@
 			</Dialog.Content>
 		</Dialog.Root>
 		<Dialog.Root bind:open={confirmDialogIsOpen}>
-			<Dialog.Trigger class={`my-2 ${buttonVariants({ variant: "destructive" })}`}>
+			<Dialog.Trigger
+				class={`mb-2 hover:bg-[#91393A] ${buttonVariants({ variant: "destructive" })}`}
+			>
 				Clear
 			</Dialog.Trigger>
-			<Dialog.Content class="sm:max-w-[30rem]">
+			<Dialog.Content class="max-w-[18rem] sm:max-w-[30rem]">
 				<Dialog.Header>
 					<Dialog.Title>Are you sure?</Dialog.Title>
 					<Dialog.Description
-						>This action will clear all profile data and is irreversible.</Dialog.Description
+						>This action will clear all profile data and is irreversible!</Dialog.Description
 					>
 				</Dialog.Header>
 				<Dialog.Footer>
+					<Button variant="destructive" on:click={handleClear}>Clear</Button>
 					<Button
-						variant="destructive"
-						on:click={() => {
-							profiles = {};
-							confirmDialogIsOpen = false;
-						}}>Clear</Button
-					>
-					<Button
+						class="mb-2 sm:mb-0"
 						on:click={() => {
 							confirmDialogIsOpen = false;
 						}}>Cancel</Button
@@ -158,40 +165,49 @@
 				</Dialog.Footer>
 			</Dialog.Content>
 		</Dialog.Root>
-		<div class="flex flex-col gap-4">
-			{#each Object.keys(profiles) as profileName}
-				<Button
-					variant="outline"
-					class={profiles[profileName].active
-						? "bg-green-800 hover:bg-green-700"
-						: "bg-red-800 hover:bg-red-700"}
-					on:click={() => {
-						profiles[profileName].active = !profiles[profileName].active;
-					}}
-				>
-					{profileName}
-				</Button>
-			{/each}
+		<div class="flex flex-col gap-2">
+			<p class="text-center">Profiles</p>
+			{#if Object.keys(profiles).length > 0}
+				{#each Object.keys(profiles) as profileName}
+					<Button
+						variant="outline"
+						class={profiles[profileName].active
+							? "bg-green-800 hover:bg-green-700"
+							: "bg-red-800 hover:bg-red-700"}
+						on:click={() => {
+							profiles[profileName].active = !profiles[profileName].active;
+						}}
+					>
+						{profileName}
+					</Button>
+				{/each}
+			{:else}
+				<Button disabled variant="outline">None</Button>
+			{/if}
 		</div>
 	</div>
 	<div />
 	<div class="p-8">
 		<table>
 			<thead>
-				<th />
+				<th class="min-w-[4rem]" />
 				{#each days as day}
-					<th>{day}</th>
+					<th class="select-none">{day}</th>
 				{/each}
 			</thead>
 			<tbody>
 				{#each scheduleTable as row, i}
 					<tr>
-						<td class="pr-4 text-right">{i < 2 ? `0${8 + i}.40` : `${8 + i}.40`}</td>
+						<td class="text-center border-l-[2px] border-l-blue-500 select-none"
+							>{i < 2 ? `0${8 + i}.40` : `${8 + i}.40`}</td
+						>
 						{#each row as _, j}
 							<td
 								class="w-[2.5rem] h-[2.5rem] min-w-[10rem] min-h-[2.5rem] border-[2px]"
-								class:bg-red-700={scheduleTable[i][j].length > 1}
-								class:bg-emerald-700={scheduleTable[i][j].length == 0}
+								class:bg-red-700={scheduleTable[i][j].length > 2}
+								class:bg-orange-700={scheduleTable[i][j].length === 2}
+								class:bg-yellow-700={scheduleTable[i][j].length === 1}
+								class:bg-emerald-700={scheduleTable[i][j].length === 0}
 							>
 								{#each scheduleTable[i][j] as courseCode}
 									<p class="text-center">

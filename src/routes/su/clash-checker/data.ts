@@ -1,6 +1,12 @@
 const numberOfHours = 11;
 const numberOfDays = 5;
 
+export type Profile = {
+	crns: string[];
+	active: boolean;
+	color: string;
+};
+
 export function createScheduleTable() {
 	const table: Array<Array<Array<string>>> = [];
 	for (let hour = 0; hour < numberOfHours; hour++) {

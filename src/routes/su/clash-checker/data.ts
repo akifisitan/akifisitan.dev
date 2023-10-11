@@ -7,8 +7,69 @@ export type Profile = {
 	color: string;
 };
 
+export type Color = {
+	card: string;
+	button: string;
+};
+
+export const colors: Record<string, Color> = {
+	amber: {
+		card: "bg-amber-800",
+		button: "bg-amber-800 hover:bg-amber-700"
+	},
+	emerald: {
+		card: "bg-emerald-800",
+		button: "bg-emerald-800 hover:bg-emerald-700"
+	},
+	sky: {
+		card: "bg-sky-800",
+		button: "bg-sky-800 hover:bg-sky-700"
+	},
+	indigo: {
+		card: "bg-indigo-800",
+		button: "bg-indigo-800 hover:bg-indigo-700"
+	},
+	rose: {
+		card: "bg-rose-800",
+		button: "bg-rose-800 hover:bg-rose-700"
+	},
+	slate: {
+		card: "bg-slate-800",
+		button: "bg-slate-800 hover:bg-slate-700"
+	},
+	stone: {
+		card: "bg-stone-800",
+		button: "bg-stone-800 hover:bg-stone-700"
+	}
+};
+
+export type CourseCard = {
+	code: string;
+	color: string;
+};
+
+function getRandomColor() {
+	const colorKeys = Object.keys(colors);
+	const randomIndex = Math.floor(Math.random() * colorKeys.length);
+	const randomColorKey = colorKeys[randomIndex];
+	return randomColorKey;
+}
+
+export function getUniqueColor(profiles: Record<string, Profile>) {
+	const currentColors: string[] = [];
+	for (let i = 0; i < Object.keys(profiles).length; i++) {
+		const profile = profiles[Object.keys(profiles)[i]];
+		currentColors.push(profile.color);
+	}
+	let color = getRandomColor();
+	while (currentColors.includes(color)) {
+		color = getRandomColor();
+	}
+	return color;
+}
+
 export function createScheduleTable() {
-	const table: Array<Array<Array<string>>> = [];
+	const table: Array<Array<Array<CourseCard>>> = [];
 	for (let hour = 0; hour < numberOfHours; hour++) {
 		table[hour] = [];
 		for (let day = 0; day < numberOfDays; day++) {

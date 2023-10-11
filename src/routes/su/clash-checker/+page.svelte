@@ -142,7 +142,7 @@
 	Clash Checker
 </h2>
 
-<div class="flex flex-row overflow-auto min-h-[100vh]">
+<div class="flex flex-row overflow-auto">
 	<div class="flex flex-col py-4 px-8">
 		<Dialog.Root
 			onOpenChange={() => {

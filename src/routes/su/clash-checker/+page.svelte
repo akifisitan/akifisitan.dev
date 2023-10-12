@@ -142,7 +142,7 @@
 	Clash Checker
 </h2>
 
-<div class="flex flex-row overflow-auto">
+<div class="flex flex-row overflow-auto min-h-[80vh - 3.5rem] sm:min-h-fit">
 	<div class="flex flex-col py-4 px-8">
 		<Dialog.Root
 			onOpenChange={() => {
@@ -181,7 +181,7 @@
 			</Dialog.Content>
 		</Dialog.Root>
 		<Dialog.Root bind:open={confirmDialogIsOpen}>
-			<Dialog.Trigger class={`${buttonVariants({ variant: "outline" })}`}>
+			<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
 				Clear
 			</Dialog.Trigger>
 			<Dialog.Content class="max-w-[18rem] sm:max-w-[30rem]">
@@ -233,7 +233,11 @@
 							>{i < 2 ? `0${8 + i}.40` : `${8 + i}.40`}</td
 						>
 						{#each row as _, j}
-							<td class="w-[2.5rem] h-[2.5rem] min-w-[10rem] min-h-[2.5rem] border-[2px]">
+							<td
+								class="h-12 min-w-[10rem] border-[2px] sm:h-10 sm:min-w-[12rem]"
+								class:bg-rose-800={scheduleTable[i][j].length > 0}
+								class:bg-emerald-800={scheduleTable[i][j].length === 0}
+							>
 								{#each scheduleTable[i][j] as { code, color }}
 									<CourseCard color={colors[color].card} {code} />
 								{/each}

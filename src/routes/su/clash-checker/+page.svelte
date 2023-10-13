@@ -136,11 +136,11 @@
 
 <Toaster />
 
-<h2
+<h1
 	class="p-2 text-center scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0 sm:text-start sm:pl-4"
 >
 	Clash Checker
-</h2>
+</h1>
 
 <div class="flex flex-row overflow-auto min-h-[80vh - 3.5rem] sm:min-h-fit">
 	<div class="flex flex-col py-4 px-8">

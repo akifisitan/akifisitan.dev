@@ -109,11 +109,11 @@
 
 <Toaster />
 
-<h2
+<h1
 	class="p-2 text-center scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0 sm:text-start sm:pl-4"
 >
 	Course Spotter
-</h2>
+</h1>
 
 <section class="flex flex-col items-center sm:flex-row sm:items-stretch">
 	<div class="side-bar">

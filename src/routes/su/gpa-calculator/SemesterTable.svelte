@@ -3,13 +3,15 @@
 		calculateCredits,
 		calculateSemesterGpa,
 		courseMap,
-		type Course
+		type Course,
+		formatGpa
 	} from "./gpa-calc-utils";
 	import * as Select from "$lib/components/ui/select";
 	import { Trash2 } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
 	import { Button } from "$lib/components/ui/button";
 	import { fade, fly } from "svelte/transition";
+	import toast from "svelte-french-toast";
 
 	export let courses: Course[];
 
@@ -21,13 +23,35 @@
 		const result = calculateSemesterGpa(courses);
 		semesterCredits = result.semesterCredits;
 		semesterQualityPoints = result.semesterQualityPoints;
-		semesterGpa = result.semesterGpa.toString().slice(0, 4);
+		semesterGpa = formatGpa(result.semesterGpa);
+	}
+
+	function addCourse() {
+		if (courses.length >= 10) {
+			toast.error("You can only take a maximum of 10 courses per semester");
+		} else {
+			courses.push({ name: "", grade: "S", credits: 3 });
+			courses = courses;
+		}
+	}
+
+	function deleteCourse(index: number) {
+		if (courses.length === 1) {
+			toast.error("You cannot delete the single remaining course!");
+		} else {
+			courses.splice(index, 1);
+			courses = courses;
+		}
 	}
 
 	$: calculateTable(courses);
 </script>
 
-<div in:fly={{ x: -100, delay: 200 }} out:fly={{ x: 100, duration: 100 }}>
+<div
+	class="flex flex-col justify-center items-center"
+	in:fly={{ x: -100, delay: 200 }}
+	out:fly={{ x: 100, duration: 100 }}
+>
 	<table class="border-spacing-1 border-separate">
 		<thead>
 			<tr>
@@ -63,17 +87,11 @@
 							maxlength={2}
 						/></td
 					>
-					{#if index !== 0}
-						<td>
-							<Button
-								variant="destructive"
-								on:click={() => {
-									courses.splice(index, 1);
-									courses = courses;
-								}}><Trash2 /></Button
-							>
-						</td>
-					{/if}
+					<td>
+						<Button variant="destructive" on:click={() => deleteCourse(index)}
+							><Trash2 /></Button
+						>
+					</td>
 				</tr>
 			{/each}
 		</tbody>
@@ -85,16 +103,6 @@
 			</tr>
 		</tfoot>
 	</table>
-	<p>Quality Points: {semesterQualityPoints}</p>
-	<Button
-		variant="outline"
-		on:click={() => {
-			if (courses.length >= 10) {
-				alert("You can only take a maximum of 10 courses per semester");
-				return;
-			}
-			courses.push({ name: "", grade: "S", credits: 3 });
-			courses = courses;
-		}}>Add Row</Button
-	>
+	<p class="py-2">Quality Points: {semesterQualityPoints}</p>
+	<Button variant="outline" on:click={addCourse}>Add Course</Button>
 </div>

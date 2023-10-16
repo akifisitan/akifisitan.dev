@@ -19,7 +19,7 @@ export type Course = {
 	name: string;
 	grade: string;
 	credits: number;
-}
+};
 
 export function calculateSemesterGpa(courses: Course[]) {
 	let totalCredits = 0;
@@ -121,4 +121,16 @@ export function parseImportedData(data: string = sampleData) {
 	}
 	console.log(semesterData);
 	return semesterData;
+}
+
+export function formatGpa(gpa: number) {
+	const gpaString = gpa.toString();
+	switch (gpaString.length) {
+		case 1:
+			return gpaString + ".00";
+		case 3:
+			return gpaString + "0";
+		default:
+			return gpaString.slice(0, 4);
+	}
 }

@@ -1,12 +1,5 @@
 <script lang="ts">
-	import {
-		calculateCredits,
-		calculateSemesterGpa,
-		courseMap,
-		type Course,
-		formatGpa
-	} from "./gpa-calc-utils";
-	import * as Select from "$lib/components/ui/select";
+	import { calculateSemesterGpa, type Course, formatGpa } from "./gpa-calc-utils";
 	import { Trash2 } from "lucide-svelte";
 	import { Input } from "$lib/components/ui/input";
 	import { Button } from "$lib/components/ui/button";
@@ -16,13 +9,13 @@
 	export let courses: Course[];
 
 	let semesterCredits = 0;
-	let semesterQualityPoints = 0;
+	let semesterQualityPoints = "0.00";
 	let semesterGpa = "0.00";
 
 	function calculateTable(courses: Course[]) {
 		const result = calculateSemesterGpa(courses);
 		semesterCredits = result.semesterCredits;
-		semesterQualityPoints = result.semesterQualityPoints;
+		semesterQualityPoints = formatGpa(result.semesterQualityPoints);
 		semesterGpa = formatGpa(result.semesterGpa);
 	}
 
@@ -37,7 +30,9 @@
 
 	function deleteCourse(index: number) {
 		if (courses.length === 1) {
-			toast.error("You cannot delete the single remaining course!");
+			toast.error(
+				"You cannot delete the single remaining course!\nDelete the semester instead"
+			);
 		} else {
 			courses.splice(index, 1);
 			courses = courses;

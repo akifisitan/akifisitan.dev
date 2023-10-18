@@ -171,14 +171,19 @@ export function parseImportedData(data: string) {
 }
 
 export function formatGpa(gpa: number) {
-	const gpaString = gpa.toString();
-	if (gpaString === "NaN") return "0.00";
-	switch (gpaString.length) {
+	const gpaS = gpa.toString();
+	const dotPosition = gpaS.indexOf(".");
+	if (dotPosition === -1) {
+		return gpaS + ".00";
+	}
+	const first = gpaS.slice(0, dotPosition);
+	const last = gpaS.slice(dotPosition + 1);
+	switch (last.length) {
 		case 1:
-			return gpaString + ".00";
-		case 3:
-			return gpaString + "0";
+			return `${first}.${last}0`;
+		case 2:
+			return `${first}.${last}`;
 		default:
-			return gpaString.slice(0, 4);
+			return `${first}.${last.slice(0, 2)}`;
 	}
 }

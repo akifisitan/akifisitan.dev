@@ -25,7 +25,7 @@
 	let semesters: Course[][] = [[{ name: "", grade: "A", credits: 3 }]];
 	let display = {
 		cumulativeGpa: "0.00",
-		qualityPoints: 0,
+		qualityPoints: "0.00",
 		gpaCredits: 0,
 		earnedCredits: 0,
 		attemptedCredits: 0
@@ -122,7 +122,7 @@
 		const result = calculateCumulativeGpa(semesters);
 		display = {
 			cumulativeGpa: formatGpa(result.cumulativeGpa),
-			qualityPoints: result.totalQualityPoints,
+			qualityPoints: formatGpa(result.totalQualityPoints),
 			gpaCredits: result.totalGpaCredits,
 			earnedCredits: result.totalEarnedCredits,
 			attemptedCredits: result.totalAttemptedCredits
@@ -309,9 +309,9 @@
 		</div>
 		{#if semesters}
 			<div class="flex flex-col justify-center items-center">
-				<ul class="flex flex-wrap max-w-[16rem]">
+				<div class="grid grid-cols-5 gap-1 justify-center items-center">
 					{#each semesters as _, index}
-						<li transition:fade={{ delay: 100 }} class="inline-block px-1 pb-1">
+						<div transition:fade={{ delay: 100 }} class="inline-block px-1 pb-1">
 							<Button
 								class="w-10"
 								variant={currentSemester === index ? "default" : "outline"}
@@ -319,9 +319,9 @@
 									currentSemester = index;
 								}}>{index + 1}</Button
 							>
-						</li>
+						</div>
 					{/each}
-				</ul>
+				</div>
 				<div class="min-h-screen overflow-y-hidden">
 					{#if semesters[currentSemester]}
 						<SemesterTable bind:courses={semesters[currentSemester]} />

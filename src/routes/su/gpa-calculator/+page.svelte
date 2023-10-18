@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import SemesterTable from "./SemesterTable.svelte";
-	import { Trash2 } from "lucide-svelte";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Textarea } from "$lib/components/ui/textarea";
@@ -24,9 +23,13 @@
 	let currentSemester = 0;
 	let currentProfile = "default";
 	let semesters: Course[][] = [[{ name: "", grade: "A", credits: 3 }]];
-	let cumulativeGpa: string = "0.00";
-	let gpaCredits = 0;
-	let attemptedCredits = 0;
+	let display = {
+		cumulativeGpa: "0.00",
+		qualityPoints: 0,
+		gpaCredits: 0,
+		earnedCredits: 0,
+		attemptedCredits: 0
+	};
 	let importDialogIsOpen = false;
 	let addProfileDialogIsOpen = false;
 	let confirmDialogIsOpen = false;
@@ -117,9 +120,13 @@
 
 	$: {
 		const result = calculateCumulativeGpa(semesters);
-		gpaCredits = result.gpaCredits;
-		attemptedCredits = result.attemptedCredits;
-		cumulativeGpa = formatGpa(result.cumulativeGpa);
+		display = {
+			cumulativeGpa: formatGpa(result.cumulativeGpa),
+			qualityPoints: result.totalQualityPoints,
+			gpaCredits: result.totalGpaCredits,
+			earnedCredits: result.totalEarnedCredits,
+			attemptedCredits: result.totalAttemptedCredits
+		};
 	}
 
 	$: selectedProfile = { value: currentProfile, label: currentProfile };
@@ -192,8 +199,9 @@
 				<Dialog.Content class="rounded-lg max-w-[16rem] sm:max-w-xs">
 					<Dialog.Header>
 						<Dialog.Title>Add Profile</Dialog.Title>
+						<Dialog.Description>Add a new profile</Dialog.Description>
 					</Dialog.Header>
-					<div class="grid gap-4 py-2">
+					<div class="grid gap-4">
 						<div class="grid grid-cols-4 items-center gap-4">
 							<Input
 								placeholder="Enter profile name"
@@ -211,10 +219,10 @@
 				<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
 					Delete Profile
 				</Dialog.Trigger>
-				<Dialog.Content class="sm:max-w-[30rem]">
+				<Dialog.Content class="rounded-lg max-w-[16rem] sm:max-w-xs">
 					<Dialog.Header>
 						<Dialog.Title>Are you sure?</Dialog.Title>
-						<Dialog.Description>This action will delete this profile.</Dialog.Description>
+						<Dialog.Description>This action will delete this profile</Dialog.Description>
 					</Dialog.Header>
 					<Dialog.Footer>
 						<Button variant="destructive" on:click={deleteProfile}>Delete</Button>
@@ -231,17 +239,17 @@
 				<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
 					Import
 				</Dialog.Trigger>
-				<Dialog.Content class="sm:max-w-[30rem]">
+				<Dialog.Content class="rounded-lg max-w-[16rem] sm:max-w-[30rem]">
 					<Dialog.Header>
 						<Dialog.Title>Import</Dialog.Title>
-						<Dialog.Description>Add import data.</Dialog.Description>
+						<Dialog.Description>Add import data</Dialog.Description>
 					</Dialog.Header>
-					<div class="grid gap-4 py-4">
+					<div class="grid gap-4">
 						<div class="grid grid-cols-4 items-center gap-4">
 							<Input
 								placeholder="Enter profile name"
 								bind:value={profileName}
-								class="col-span-2"
+								class="col-span-4 sm:col-span-2"
 							/>
 							<Textarea
 								placeholder="Enter data"
@@ -259,11 +267,11 @@
 				<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
 					Clear
 				</Dialog.Trigger>
-				<Dialog.Content class="sm:max-w-[30rem]">
+				<Dialog.Content class="rounded-lg max-w-[16rem] sm:max-w-xs">
 					<Dialog.Header>
 						<Dialog.Title>Are you sure?</Dialog.Title>
 						<Dialog.Description
-							>This action will clear all profile data and is irreversible.</Dialog.Description
+							>This action will clear all profile data and is irreversible</Dialog.Description
 						>
 					</Dialog.Header>
 					<Dialog.Footer>
@@ -275,23 +283,33 @@
 		<div class="text-center">
 			<div>
 				<p>
-					Cumulative GPA: {cumulativeGpa}
+					Cumulative GPA: {display.cumulativeGpa}
 				</p>
 				<p>
-					GPA Credits: {gpaCredits}
+					GPA Credits: {display.gpaCredits}
 				</p>
 				<p>
-					Attempted Credits: {attemptedCredits}
+					Earned Credits: {display.earnedCredits}
+				</p>
+				<p>
+					Attempted Credits: {display.attemptedCredits}
+				</p>
+				<p>
+					Total Quality Points: {display.qualityPoints}
 				</p>
 			</div>
 		</div>
-		<div class="flex gap-1 justify-center items-center py-2">
-			<Button variant="outline" on:click={addSemester}>Add Semester</Button>
-			<Button variant="outline" on:click={deleteSemester}>Delete Semester</Button>
+		<div class="flex gap-2 justify-center items-center py-2">
+			<Button variant="outline" class="flex-1 max-w-[8rem]" on:click={addSemester}
+				>Add Semester</Button
+			>
+			<Button variant="outline" class="flex-1 max-w-[8rem]" on:click={deleteSemester}
+				>Delete Semester</Button
+			>
 		</div>
 		{#if semesters}
-			<div>
-				<ul>
+			<div class="flex flex-col justify-center items-center">
+				<ul class="flex flex-wrap max-w-[16rem]">
 					{#each semesters as _, index}
 						<li transition:fade={{ delay: 100 }} class="inline-block px-1 pb-1">
 							<Button
@@ -307,7 +325,6 @@
 				<div class="min-h-screen overflow-y-hidden">
 					{#if semesters[currentSemester]}
 						<SemesterTable bind:courses={semesters[currentSemester]} />
-						<!-- <SemesterTable bind:courses={semesters[currentSemester]} /> -->
 					{/if}
 				</div>
 			</div>

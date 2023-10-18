@@ -322,7 +322,7 @@
 						</div>
 					{/each}
 				</div>
-				<div class="min-h-screen overflow-y-hidden">
+				<div>
 					{#if semesters[currentSemester]}
 						<SemesterTable bind:courses={semesters[currentSemester]} />
 					{/if}

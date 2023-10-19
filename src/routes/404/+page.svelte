@@ -5,7 +5,11 @@
 <div class="outer">
 	<div class="inner">
 		<h1>Oops</h1>
-		<p>Seems that does not exist</p>
+		<p class="pb-2">Seems that does <span class="text-rose-600">not</span> exist</p>
+		<a
+			class="mx-auto text-center bg-emerald-800 border-[2px] w-16 border-gray-900 p-1 rounded-md hover:bg-gray-900"
+			href="/">Home</a
+		>
 	</div>
 </div>
 

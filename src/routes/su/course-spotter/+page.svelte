@@ -187,18 +187,26 @@
 	</div>
 	<div class="w-full">
 		{#if responseData}
-			<div class="search-menu">
-				<Input type="search" bind:value={query} placeholder="Search for a course" />
-				<Label>Capacity</Label><Slider
-					class="inline-flex py-2 mx-4 w-[10rem]"
-					onValueChange={(e) => {
-						queryCapacity = e?.at(0) ?? 0;
-					}}
-					value={[0]}
-					max={300}
-					step={5}
+			<div class="pt-4 px-4">
+				<Input
+					class="mb-2 text-center sm:text-start"
+					type="search"
+					bind:value={query}
+					placeholder="Search for a course"
 				/>
-				<p class="inline-flex">{queryCapacity}</p>
+				<Label class="p-2">Course Capacity</Label>
+				<div class="flex px-4 py-2 gap-4">
+					<Slider
+						class="flex-grow flex-shrink basis-0"
+						onValueChange={(e) => {
+							queryCapacity = e?.at(0) ?? 0;
+						}}
+						value={[0]}
+						max={300}
+						step={1}
+					/>
+					<p class="flex-grow-0 flex-shrink-0 basis-8 text-end">{queryCapacity}</p>
+				</div>
 			</div>
 			{#if courses.length > 0}
 				<div class="course-display">
@@ -233,9 +241,6 @@
 </section>
 
 <style>
-	.search-menu {
-		padding: 2rem 1rem 0 1rem;
-	}
 	.course-display {
 		display: grid;
 		padding: 1rem;

@@ -30,10 +30,10 @@ export const terms = [
 ];
 
 export type CourseData = {
-	crn: string;
+	crn: number;
 	code: string;
 	section: string;
 	total_capacity: number;
 	actual_capacity: number;
 	remaining_capacity: number;
-}
+};

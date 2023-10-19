@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>akifisitan.dev</title>
+	<title>akifisitan</title>
 </svelte:head>
 
 <div class="flex flex-col items-center justify-center w-full min-h-[100vh]">

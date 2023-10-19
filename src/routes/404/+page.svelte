@@ -1,19 +1,11 @@
-<script>
-	import { page } from "$app/stores";
-</script>
-
 <svelte:head>
-	<title>{$page.status}</title>
+	<title>404</title>
 </svelte:head>
 
 <div class="outer">
 	<div class="inner">
 		<h1>Oops</h1>
-		{#if $page.status === 404}
-			<p>Seems that does not exist</p>
-		{:else}
-			<p>Something went wrong</p>
-		{/if}
+		<p>Seems that does not exist</p>
 	</div>
 </div>
 

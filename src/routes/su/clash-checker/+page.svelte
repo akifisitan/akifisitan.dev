@@ -235,8 +235,7 @@
 						{#each row as _, j}
 							<td
 								class="h-12 min-w-[10rem] border-[2px] sm:h-10 sm:min-w-[12rem]"
-								class:bg-rose-800={scheduleTable[i][j].length > 0}
-								class:bg-emerald-800={scheduleTable[i][j].length === 0}
+								class:bg-teal-600={scheduleTable[i][j].length === 0}
 							>
 								{#each scheduleTable[i][j] as { code, color }}
 									<CourseCard color={colors[color].card} {code} />

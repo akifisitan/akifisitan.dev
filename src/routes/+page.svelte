@@ -18,15 +18,15 @@
 			<div class="project-links">
 				<a
 					class="text-center bg-rose-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/su/gpa-calculator">GPA Calculator</a
+					href="/projects/gpa-calculator">GPA Calculator</a
 				>
 				<a
 					class="text-center bg-emerald-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/su/course-spotter">Course Spotter</a
+					href="/projects/course-spotter">Course Spotter</a
 				>
 				<a
 					class=" text-center bg-sky-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/su/clash-checker">Clash Checker</a
+					href="/projects/clash-checker">Clash Checker</a
 				>
 			</div>
 		</div>

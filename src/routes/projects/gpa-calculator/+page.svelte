@@ -151,7 +151,7 @@
 				);
 			}
 		} else {
-			toast.success("Welcome to gpa calculator!");
+			toast.success("Welcome to Gpa Calculator");
 		}
 		loaded = true;
 	});
@@ -162,6 +162,12 @@
 </svelte:head>
 
 <Toaster />
+
+<h1
+	class="p-2 text-center scroll-m-20 border-b text-3xl font-semibold tracking-tight transition-colors first:mt-0 sm:text-start sm:pl-4"
+>
+	Gpa Calculator
+</h1>
 
 <div class="flex flex-col justify-center items-center">
 	<div class="p-4 flex flex-col">

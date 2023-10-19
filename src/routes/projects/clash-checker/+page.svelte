@@ -124,7 +124,7 @@
 				);
 			}
 		} else {
-			toast.success("Welcome to clash checker!");
+			toast.success("Welcome to Clash Checker");
 		}
 		loaded = true;
 	});

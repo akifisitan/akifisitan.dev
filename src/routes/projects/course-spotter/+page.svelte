@@ -34,10 +34,12 @@
 		courses = responseData.filter((course) => {
 			if (query) {
 				return (
-					course.remaining_capacity >= queryCapacity &&
-					course.code.toLowerCase().includes(query.toLowerCase())
+					course.remaining_capacity >= queryCapacity ||
+					(course.remaining_capacity < 0 &&
+						course.code.toLowerCase().includes(query.toLowerCase()))
 				);
-			} else return course.remaining_capacity >= queryCapacity;
+			}
+			return course.remaining_capacity >= queryCapacity;
 		});
 	}
 

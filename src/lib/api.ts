@@ -37,9 +37,9 @@ async function send(
 		return { data: text ? JSON.parse(text) : null, status: response.status };
 	} catch (e) {
 		if (e.message === "fetch failed") {
-			throw error(503, { message: "Server is offline" });
+			error(503, { message: "Server is offline" });
 		}
-		throw error(500, { message: e.message });
+		error(500, { message: e.message });
 	}
 }
 

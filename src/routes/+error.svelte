@@ -2,10 +2,6 @@
 	import { page } from "$app/stores";
 </script>
 
-<svelte:head>
-	<title>{$page.status}</title>
-</svelte:head>
-
 <div class="outer">
 	<div class="inner">
 		<h1>Oops</h1>
@@ -24,7 +20,7 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		min-height: calc(100vh - 4rem);
+		min-height: calc(100dvh - 16rem);
 	}
 	.inner {
 		display: flex;

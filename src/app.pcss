@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 @layer base {
+	html.debug * {
+		outline: 1px solid red !important;
+	}
+
 	:root {
 		--background: 0 0% 100%;
 		--foreground: 240 10% 3.9%;
@@ -79,7 +83,7 @@
 
 	/* Scrollbar */
 	::-webkit-scrollbar {
-		@apply w-1.5 h-1.5;
+		@apply h-1.5 w-1.5;
 	}
 
 	::-webkit-scrollbar-track {
@@ -87,7 +91,7 @@
 	}
 
 	::-webkit-scrollbar-thumb {
-		@apply bg-zinc-700 rounded-lg;
+		@apply rounded-lg bg-zinc-700;
 	}
 
 	::-webkit-scrollbar-thumb:hover {

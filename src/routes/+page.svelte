@@ -1,55 +1,42 @@
 <script lang="ts">
-	import { Linkedin, Github, FileText } from "lucide-svelte";
+	import Project from "$lib/components/Project.svelte";
+	import SocialLinks from "$lib/components/SocialLinks.svelte";
+	import { homeProjects } from "$lib/data/projects";
 </script>
 
-<div class="flex flex-col items-center justify-center w-full min-h-[100vh]">
-	<div class="flex flex-col w-72">
-		<div class="align-middle text-5xl pb-4">
-			<h1>Hey, I'm Akif</h1>
-		</div>
-		<div>
-			<p class="pb-2 text-center">I am interested in building software</p>
-			<div class="project-links">
-				<a
-					class="text-center bg-rose-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/projects/gpa-calculator">GPA Calculator</a
-				>
-				<a
-					class="text-center bg-emerald-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/projects/course-spotter">Course Spotter</a
-				>
-				<a
-					class=" text-center bg-sky-800 border-[2px] border-gray-900 p-1 rounded-md hover:bg-gray-900"
-					href="/projects/clash-checker">Clash Checker</a
-				>
-			</div>
-		</div>
-		<div class="flex flex-row items-center justify-center p-4">
-			<a
-				class="m-2 border-[3px] border-gray-600 rounded-sm"
-				href="https://github.com/akifisitan"
+<main class="container">
+	<section class="container prose prose-zinc dark:prose-invert">
+		<h1>Akif Işıtan</h1>
+		<p>Hey, I'm Akif Işıtan, an aspiring software engineer.</p>
+		<p>
+			I'm currently on the final semester of my Computer Science Bachelor's degree at <a
+				href="https://www.sabanciuniv.edu/en"
 				target="_blank"
+				rel="noopener noreferrer"
+				class="not-prose border-b transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-300"
 			>
-				<Github class="bg-gray-600 hover:text-gray-900" />
-				<span class="sr-only">Github</span>
-			</a>
-			<a
-				class="m-2 border-[3px] border-blue-500 rounded-sm"
-				href="https://linkedin.com/in/akifisitan"
-				target="_blank"
-			>
-				<Linkedin class="bg-blue-500 hover:text-blue-900" />
-				<span class="sr-only">LinkedIn</span>
-			</a>
-			<!-- <a class="p-2" href="/files/cv" target="_blank"><FileText class="w-6 h-6" /></a> -->
-		</div>
+				Sabancı University</a
+			>.
+		</p>
+		<p>Here are some of my projects:</p>
+	</section>
+	<div
+		class="mx-auto my-5 grid max-w-5xl grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 md:grid-cols-3"
+	>
+		{#each homeProjects as project}
+			<Project {project} />
+		{/each}
 	</div>
-</div>
-
-<style>
-	.project-links {
-		display: grid;
-		gap: 0.25rem;
-		grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-	}
-</style>
+	<section class="container prose prose-zinc dark:prose-invert">
+		<p>
+			You can find the full projects list on my <a
+				href="/projects"
+				class="not-prose border-b transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-300"
+			>
+				projects page</a
+			>.
+		</p>
+		<p>You can find me on</p>
+		<SocialLinks />
+	</section>
+</main>

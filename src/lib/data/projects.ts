@@ -1,121 +1,128 @@
-export const sections = [
-	{
-		title: "Current Focus",
-		projects: [
-			{
-				name: "HealTrack",
-				description: "Health tracking system that allows users to track their health data.",
-				icon: "healtrack",
-			},
-		],
+const projects = {
+	healtrack: {
+		name: "HealTrack",
+		description:
+			"Medication management app that ensures timely doses, alerts caregivers to issues, and offers a chatbot for answering medication-related questions.",
+		link: undefined,
+		icon: "healtrack",
 	},
-	{
-		title: "Course Projects",
-		projects: [
-			{
-				name: "Ovatify",
-				description:
-					"Music platform focused on sharing and viewing music information, designed to offer tailored experiences to music enjoyers.",
-				link: "https://github.com/akifisitan/ovatify-demo",
-				icon: "ovatify",
-			},
-			{
-				name: "TicTacToe-Network",
-				description:
-					"Socket programming project which allows multiple players to engage in the classic TicTacToe game over network.",
-				link: "https://github.com/akifisitan/tictactoe-network",
-				icon: "tictactoe",
-			},
-			{
-				name: "Rhythms of Code",
-				description:
-					"Data science project exploring the connection between programming, music listening habits, and sleep patterns.",
-				link: "https://github.com/akifisitan/rhythms-of-code",
-				icon: "rhythms-of-code",
-			},
-			{
-				name: "NewsApp",
-				description:
-					"Android native app which allows users to read news, and post and view comments about them.",
-				link: "https://github.com/akifisitan/newsapp",
-				icon: "newsapp",
-			},
-			{
-				name: "Hang7e",
-				description:
-					"Web application which allows users to play Hangman and Word7e, and see their points via the leaderboard.",
-				link: "https://github.com/akifisitan/hang7e",
-				icon: "hang7e",
-			},
-		],
-	},
-	{
-		title: "Hobby Projects",
-		projects: [
-			{
-				name: "Gpa-Calc",
-				description:
-					"An easy-to-use tool that enables Sabanci University students to calculate their semester and overall GPAs on the fly.",
-				link: "https://github.com/akifisitan/gpa-calc",
-				icon: "gpa-calc",
-			},
-			{
-				name: "SvelteRE",
-				description:
-					"Fullstack web project which allows users to create, edit and view property listings.",
-				link: "https://github.com/akifisitan/sveltere",
-				icon: "sveltere",
-			},
-			{
-				name: "GMPBot",
-				description: "A general, multi-purpose Discord bot built using the nextcord library.",
-				link: "https://github.com/akifisitan/gmpbot",
-				icon: "gmpbot",
-			},
-		],
-	},
-] as const;
-
-export const homeProjects = [
-	{
+	ovatify: {
 		name: "Ovatify",
 		description:
 			"Music platform focused on sharing and viewing music information, designed to offer tailored experiences to music enjoyers.",
-		link: "https://github.com/akifisitan/ovatify-demo",
+		link: "https://github.com/akifisitan/ovatify",
 		icon: "ovatify",
 	},
-	{
-		name: "Gpa-Calc",
-		description:
-			"An easy-to-use tool that enables Sabanci University students to calculate their semester and overall GPAs on the fly.",
-		link: "https://github.com/akifisitan/gpa-calc",
-		icon: "gpa-calc",
-	},
-	{
+	tictactoe_network: {
 		name: "TicTacToe-Network",
 		description:
 			"Socket programming project which allows multiple players to engage in the classic TicTacToe game over network.",
 		link: "https://github.com/akifisitan/tictactoe-network",
 		icon: "tictactoe",
 	},
-	{
-		name: "SvelteRE",
-		description:
-			"Fullstack web project which allows users to create, edit and view property listings.",
-		link: "https://github.com/akifisitan/sveltere",
-		icon: "sveltere",
-	},
-	{
-		name: "GMPBot",
-		description: "A general, multi-purpose Discord bot built using the nextcord library.",
-		link: "https://github.com/akifisitan/gmpbot",
-		icon: "gmpbot",
-	},
-	{
+	rhythms_of_code: {
 		name: "Rhythms of Code",
 		description:
 			"Data science project exploring the connection between programming, music listening habits, and sleep patterns.",
 		link: "https://github.com/akifisitan/rhythms-of-code",
 		icon: "rhythms-of-code",
 	},
+	newsapp: {
+		name: "NewsApp",
+		description:
+			"Android native app which allows users to read news, and post and view comments about them.",
+		link: "https://github.com/akifisitan/newsapp",
+		icon: "newsapp",
+	},
+	hang7e: {
+		name: "Hang7e",
+		description:
+			"Web application which allows users to play Hangman and Word7e, and see their points via the leaderboard.",
+		link: "https://github.com/akifisitan/hang7e",
+		icon: "hang7e",
+	},
+	unocord: {
+		name: "unocord",
+		description: "A bot that allows server members to play Uno inside Discord.",
+		link: "https://github.com/akifisitan/unocord",
+		icon: "unocord",
+	},
+	gpa_calc: {
+		name: "gpa-calc",
+		description:
+			"An easy-to-use tool that enables Sabanci University students to calculate their semester and overall GPAs on the fly.",
+		link: "https://github.com/akifisitan/gpa-calc",
+		icon: "gpa-calc",
+	},
+	sveltere: {
+		name: "SvelteRE",
+		description:
+			"Fullstack web project which allows users to create, edit and view property listings.",
+		link: "https://github.com/akifisitan/sveltere",
+		icon: "sveltere",
+	},
+	real_estate_app_api: {
+		name: "Real Estate App API",
+		description:
+			"Backend API project built for RealEstateApp & SvelteRE with CRUD operations, user authentication and image uploads.",
+		link: "https://github.com/akifisitan/RealEstateApp.Api",
+		icon: "real-estate-app-api",
+	},
+	gmpbot: {
+		name: "GMPBot",
+		description:
+			"A Discord bot which has reminders, emoji scraping and rock paper scissors built in.",
+		link: "https://github.com/akifisitan/gmpbot",
+		icon: "gmpbot",
+	},
+	suchedule_plus: {
+		name: "Suchedule+",
+		description: "Suchedule but better",
+		link: "https://github.com/akifisitan/suchedule",
+		icon: "suchedule-plus",
+	},
+	sucraper: {
+		name: "Sucraper",
+		description: "A web scraper for the Sucrerieux website",
+		link: "https://github.com/akifisitan/sucraper",
+		icon: "sucraper",
+	},
+} as const;
+
+export const projectSections = [
+	{
+		title: "Current Focus",
+		projects: [projects.healtrack],
+	},
+	{
+		title: "Course Projects",
+		projects: [
+			projects.ovatify,
+			projects.tictactoe_network,
+			projects.rhythms_of_code,
+			projects.newsapp,
+			projects.hang7e,
+		],
+	},
+	{
+		title: "Hobby Projects",
+		projects: [
+			projects.unocord,
+			projects.gpa_calc,
+			projects.sveltere,
+			projects.real_estate_app_api,
+			projects.gmpbot,
+		],
+	},
+] as const;
+
+export const homeProjects = [
+	projects.ovatify,
+	projects.gpa_calc,
+	projects.tictactoe_network,
+	projects.sveltere,
+	projects.real_estate_app_api,
+	projects.gmpbot,
+	projects.rhythms_of_code,
+	projects.unocord,
 ] as const;

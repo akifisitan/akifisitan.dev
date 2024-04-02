@@ -4,7 +4,7 @@
 	import { homeProjects } from "$lib/data/projects";
 </script>
 
-<main class="container">
+<main class="container min-h-[calc(100dvh-5.5rem)]">
 	<section class="container prose prose-zinc dark:prose-invert">
 		<h1>Akif Işıtan</h1>
 		<p>Hey, I'm Akif Işıtan, an aspiring software engineer.</p>
@@ -20,13 +20,13 @@
 		</p>
 		<p>Here are some of my projects:</p>
 	</section>
-	<div
+	<section
 		class="mx-auto my-5 grid max-w-5xl grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 md:grid-cols-3"
 	>
 		{#each homeProjects as project}
 			<Project {project} />
 		{/each}
-	</div>
+	</section>
 	<section class="container prose prose-zinc dark:prose-invert">
 		<p>
 			You can find the full projects list on my <a

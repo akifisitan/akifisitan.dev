@@ -6,7 +6,7 @@
 
 <header>
 	<a href="/" class="absolute m-5">
-		<Signature class="size-12" />
+		<Signature class="size-12" /><span class="sr-only">Akif Isitan</span>
 	</a>
 	<nav class="flex w-full items-center justify-between p-8 text-zinc-400">
 		<div class="spacer"></div>

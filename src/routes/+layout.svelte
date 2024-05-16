@@ -3,11 +3,14 @@
 	import { navigating } from "$app/stores";
 	import Loading from "$lib/components/Loading.svelte";
 	import Nav from "$lib/components/Nav.svelte";
+	import { ModeWatcher } from "mode-watcher";
 </script>
 
 {#if $navigating}
 	<Loading />
 {/if}
+
+<ModeWatcher defaultMode="dark" />
 
 <Nav />
 

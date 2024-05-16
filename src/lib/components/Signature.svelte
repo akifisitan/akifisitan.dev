@@ -61,6 +61,6 @@
 		animation: grow 10s ease forwards infinite;
 		transform-origin: center;
 		animation-delay: 0s;
-		@apply stroke-white brightness-200;
+		@apply stroke-primary;
 	}
 </style>

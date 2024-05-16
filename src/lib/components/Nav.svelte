@@ -2,6 +2,7 @@
 	import Linkedin from "lucide-svelte/icons/linkedin";
 	import Github from "lucide-svelte/icons/github";
 	import Signature from "./Signature.svelte";
+	import LightSwitch from "./LightSwitch.svelte";
 </script>
 
 <header>
@@ -37,6 +38,7 @@
 				<Linkedin class="size-5" />
 				<span class="sr-only">Linkedin</span>
 			</a>
+			<LightSwitch />
 		</div>
 	</nav>
 </header>

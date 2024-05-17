@@ -4,7 +4,7 @@
 	import { homeProjects } from "$lib/data/projects";
 </script>
 
-<main class="container min-h-[calc(100dvh-5.5rem)]">
+<main class="container">
 	<section class="container prose prose-zinc dark:prose-invert">
 		<h1>Akif Işıtan</h1>
 		<p>Hey, I'm Akif Işıtan, an aspiring software engineer.</p>
@@ -13,7 +13,7 @@
 				href="https://www.sabanciuniv.edu/en"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="not-prose border-b transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-300"
+				class="not-prose link"
 			>
 				Sabancı University</a
 			>.
@@ -29,10 +29,7 @@
 	</section>
 	<section class="container prose prose-zinc dark:prose-invert">
 		<p>
-			You can find the full projects list on my <a
-				href="/projects"
-				class="not-prose border-b transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-300"
-			>
+			You can find the full projects list on my <a href="/projects" class="not-prose link">
 				projects page</a
 			>.
 		</p>
@@ -40,3 +37,9 @@
 		<SocialLinks />
 	</section>
 </main>
+
+<style lang="postcss">
+	.link {
+		@apply border-b border-zinc-300 text-zinc-900 transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-300;
+	}
+</style>

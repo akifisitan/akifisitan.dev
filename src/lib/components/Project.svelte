@@ -21,7 +21,7 @@
 			alt="{project.name} icon"
 		/>
 		<div>
-			<h5>{project.name}</h5>
+			<h3>{project.name}</h3>
 			<p class="text-sm opacity-50">{project.description}</p>
 		</div>
 	</a>
@@ -35,7 +35,7 @@
 			alt="{project.name} icon"
 		/>
 		<div>
-			<h5>{project.name}</h5>
+			<h3>{project.name}</h3>
 			<p class="text-sm opacity-50">{project.description}</p>
 		</div>
 	</div>

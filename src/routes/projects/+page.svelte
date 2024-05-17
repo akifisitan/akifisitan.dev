@@ -7,10 +7,10 @@
 	class="container prose prose-zinc min-h-[calc(100dvh-5.5rem)] dark:prose-invert md:max-w-screen-lg"
 >
 	<h1 class="text-center">Projects</h1>
-	<article class="pb-8">
+	<section class="pb-8">
 		{#each projectSections as section}
 			<section>
-				<h4 class="text-center font-bold opacity-75">{section.title}</h4>
+				<h2 class="text-center text-base font-bold opacity-75">{section.title}</h2>
 				<div
 					class="not-prose mx-auto my-5 grid max-w-5xl grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 md:grid-cols-3"
 				>
@@ -20,5 +20,5 @@
 				</div>
 			</section>
 		{/each}
-	</article>
+	</section>
 </main>

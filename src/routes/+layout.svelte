@@ -14,14 +14,16 @@
 
 <Nav />
 
-<main>
+<div>
 	<slot />
-</main>
+</div>
 
-<style>
+<div class="py-8"></div>
+
+<style lang="postcss">
 	@media (min-width: 640px) {
-		main::before {
-			position: absolute;
+		div::before {
+			position: fixed;
 			z-index: -1;
 			content: "";
 			top: 0%;

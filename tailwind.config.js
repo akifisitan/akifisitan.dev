@@ -15,6 +15,26 @@ const config = {
 			},
 		},
 		extend: {
+			typography: ({ theme }) => ({
+				slate: {
+					css: {
+						"--tw-prose-invert-body": theme("colors.slate[400]"),
+						"--tw-prose-invert-headings": theme("colors.slate[200]"),
+						"--tw-prose-invert-links": theme("colors.white"),
+						"--tw-prose-invert-bold": theme("colors.white"),
+						"--tw-prose-invert-code": theme("colors.slate[400]"),
+					},
+				},
+				zinc: {
+					css: {
+						"--tw-prose-invert-body": theme("colors.zinc[400]"),
+						"--tw-prose-invert-headings": theme("colors.zinc[200]"),
+						"--tw-prose-invert-links": theme("colors.white"),
+						"--tw-prose-invert-bold": theme("colors.white"),
+						"--tw-prose-invert-code": theme("colors.zinc[400]"),
+					},
+				},
+			}),
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",

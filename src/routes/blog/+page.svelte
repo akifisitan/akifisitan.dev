@@ -3,6 +3,10 @@
 	$: console.log(data);
 </script>
 
+<svelte:head>
+	<title>Blog - Akif Isitan</title>
+</svelte:head>
+
 <section class="container prose dark:prose-invert">
 	<h1>Blog</h1>
 	<p>Coming soon!</p>

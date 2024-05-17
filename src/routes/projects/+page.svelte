@@ -3,9 +3,11 @@
 	import { projectSections } from "$lib/data/projects";
 </script>
 
-<main
-	class="container prose prose-zinc min-h-[calc(100dvh-5.5rem)] dark:prose-invert md:max-w-screen-lg"
->
+<svelte:head>
+	<title>Projects - Akif Isitan</title>
+</svelte:head>
+
+<main class="container prose prose-zinc dark:prose-invert md:max-w-screen-lg">
 	<h1 class="text-center">Projects</h1>
 	<section class="pb-8">
 		{#each projectSections as section}

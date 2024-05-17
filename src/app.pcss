@@ -91,10 +91,18 @@
 	}
 
 	::-webkit-scrollbar-thumb {
-		@apply rounded-lg bg-indigo-700;
+		@apply rounded-lg bg-indigo-400;
 	}
 
 	::-webkit-scrollbar-thumb:hover {
+		@apply bg-indigo-600 bg-opacity-90;
+	}
+
+	.dark ::-webkit-scrollbar-thumb {
+		@apply rounded-lg bg-indigo-700;
+	}
+
+	.dark ::-webkit-scrollbar-thumb:hover {
 		@apply bg-indigo-500 bg-opacity-90;
 	}
 }

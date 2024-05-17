@@ -4,6 +4,10 @@
 	import { homeProjects } from "$lib/data/projects";
 </script>
 
+<svelte:head>
+	<title>Akif Isitan</title>
+</svelte:head>
+
 <main class="container">
 	<section class="container prose prose-zinc dark:prose-invert">
 		<h1>Akif Işıtan</h1>

@@ -13,7 +13,7 @@
 		href={project.link}
 		target="_blank"
 		rel="noopener noreferrer"
-		class="flex rounded-lg px-3.5 py-2 opacity-50 transition-all duration-200 ease-out hover:bg-[#9fd02311] hover:opacity-100"
+		class="flex rounded-lg px-3.5 py-2 text-zinc-950 opacity-50 transition-all duration-200 ease-out hover:bg-[#9fd02311] hover:opacity-100 dark:text-zinc-50"
 	>
 		<img
 			class="mr-5 size-9 flex-shrink-0 self-center"
@@ -27,7 +27,7 @@
 	</a>
 {:else}
 	<div
-		class="flex select-none rounded-lg px-3.5 py-2 opacity-50 transition-all duration-200 ease-out hover:bg-[#9fd02311] hover:opacity-100"
+		class="flex select-none rounded-lg px-3.5 py-2 text-zinc-950 opacity-50 transition-all duration-200 ease-out hover:bg-[#9fd02311] hover:opacity-100 dark:text-zinc-50"
 	>
 		<img
 			class="mr-5 size-9 flex-shrink-0 self-center"

@@ -5,6 +5,10 @@
 	$: console.log(data);
 </script>
 
+<svelte:head>
+	<title>{data.metadata.title}</title>
+</svelte:head>
+
 <main>
 	<div class="mx-auto max-w-7xl px-4 pb-8 pt-2 lg:px-8">
 		<a
@@ -15,7 +19,7 @@
 			/>Go back</a
 		>
 	</div>
-	<article class="container prose prose-zinc max-w-3xl dark:prose-invert prose-a:no-underline">
+	<article class="container prose prose-zinc max-w-3xl dark:prose-invert">
 		<p class="inset-x-0 text-sm">
 			{new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(
 				new Date(data.metadata.date)
@@ -30,6 +34,9 @@
 
 <style lang="postcss">
 	:global(article a) {
-		@apply border-b border-zinc-400 transition-all duration-200 hover:border-zinc-700 dark:border-zinc-700;
+		@apply border-b border-zinc-300 text-zinc-900 transition-all duration-200 hover:border-zinc-700;
+	}
+	:global(.dark article a) {
+		@apply border-b border-zinc-700 text-zinc-300 transition-all duration-200 hover:border-zinc-300;
 	}
 </style>

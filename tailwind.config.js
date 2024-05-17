@@ -16,6 +16,13 @@ const config = {
 		},
 		extend: {
 			typography: ({ theme }) => ({
+				DEFAULT: {
+					css: {
+						a: {
+							textDecoration: "none",
+						},
+					},
+				},
 				slate: {
 					css: {
 						"--tw-prose-invert-body": theme("colors.slate[400]"),
@@ -27,9 +34,10 @@ const config = {
 				},
 				zinc: {
 					css: {
+						"--tw-prose-links": theme("colors.zinc[900]"),
 						"--tw-prose-invert-body": theme("colors.zinc[400]"),
 						"--tw-prose-invert-headings": theme("colors.zinc[200]"),
-						"--tw-prose-invert-links": theme("colors.white"),
+						"--tw-prose-invert-links": theme("colors.zinc[50]"),
 						"--tw-prose-invert-bold": theme("colors.white"),
 						"--tw-prose-invert-code": theme("colors.zinc[400]"),
 					},

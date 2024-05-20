@@ -3,7 +3,7 @@ import type { Post } from "./types";
 export const getLocalPosts = async () => {
 	// Fetch posts from local Markdown files
 	const posts: Post[] = await Promise.all(
-		Object.entries(import.meta.glob("../../posts/**/*.md")).map(async ([path, resolver]) => {
+		Object.entries(import.meta.glob("../posts/**/*.md")).map(async ([path, resolver]) => {
 			const resolved = (await resolver()) as { metadata: Post };
 			const { metadata } = resolved;
 			const slug = path.split("/").pop()?.slice(0, -3) ?? "";

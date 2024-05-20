@@ -90,7 +90,7 @@ const projects = {
 	ovatify_on_the_cloud: {
 		name: "Ovatify On The Cloud",
 		description:
-			"Ovatify the music platform redesigned and adapted to run as a Cloud Native application.",
+			"Ovatify, the social music platform, redesigned and adapted to run as a Cloud Native application.",
 		link: undefined,
 		icon: "ovatify-on-the-cloud",
 	},

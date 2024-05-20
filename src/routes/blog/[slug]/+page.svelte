@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { formatDate } from "$lib/date";
 	import ChevronLeft from "lucide-svelte/icons/chevron-left";
+
 	export let data;
 
 	$: console.log(data);
@@ -7,6 +9,8 @@
 
 <svelte:head>
 	<title>{data.metadata.title}</title>
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content={data.metadata.title} />
 </svelte:head>
 
 <main>
@@ -21,9 +25,7 @@
 	</div>
 	<article class="container prose prose-zinc max-w-3xl dark:prose-invert">
 		<p class="inset-x-0 text-sm">
-			{new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(
-				new Date(data.metadata.date)
-			)}
+			{formatDate(data.metadata.date)}
 		</p>
 		<h1 class="text-2xl font-extrabold tracking-tight md:text-3xl">
 			{data.metadata.title}

@@ -7,4 +7,5 @@ export type Post = {
 	title: string;
 	date: string;
 	published: boolean;
+	slug: string;
 };

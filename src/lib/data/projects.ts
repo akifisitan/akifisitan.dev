@@ -83,16 +83,23 @@ const projects = {
 	},
 	sucraper: {
 		name: "Sucraper",
-		description: "A web scraper for the Sucrerieux website",
+		description: "A web scraper for ???",
 		link: "https://github.com/akifisitan/sucraper",
 		icon: "sucraper",
+	},
+	ovatify_on_the_cloud: {
+		name: "Ovatify On The Cloud",
+		description:
+			"Ovatify the music platform redesigned and adapted to run as a Cloud Native application.",
+		link: undefined,
+		icon: "ovatify-on-the-cloud",
 	},
 } as const;
 
 export const projectSections = [
 	{
 		title: "Current Focus",
-		projects: [projects.healtrack],
+		projects: [projects.healtrack, projects.ovatify_on_the_cloud],
 	},
 	{
 		title: "Course Projects",

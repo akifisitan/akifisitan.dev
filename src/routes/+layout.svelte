@@ -11,11 +11,7 @@
 {/if}
 
 <svelte:head>
-	<title>Akif Işıtan</title>
-	<meta property="og:title" content="Akif Işıtan" />
-	<meta name="author" content="Akif Işıtan" />
-	<meta name="description" content="Akif Işıtan's Portfolio" />
-	<meta property="og:description" content="Akif Işıtan's Portfolio" />
+	<meta name="author" content="Akif Isitan" />
 </svelte:head>
 
 <ModeWatcher defaultMode="dark" />

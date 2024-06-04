@@ -6,6 +6,9 @@
 
 <svelte:head>
 	<title>Akif Isitan</title>
+	<meta property="og:title" content="Akif Isitan" />
+	<meta name="description" content="Akif Isitan's Personal Website" />
+	<meta property="og:description" content="Akif Isitan's Personal Website" />
 </svelte:head>
 
 <main class="container">

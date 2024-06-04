@@ -5,6 +5,9 @@
 
 <svelte:head>
 	<title>Projects - Akif Isitan</title>
+	<meta property="og:title" content="Projects - Akif Isitan" />
+	<meta name="description" content="Akif Isitan's Projects" />
+	<meta property="og:description" content="Akif Isitan's Projects" />
 </svelte:head>
 
 <main class="container prose prose-zinc dark:prose-invert md:max-w-screen-lg">

@@ -1,16 +1,19 @@
 <script lang="ts">
+	import { dev } from "$app/environment";
 	import { formatDate } from "$lib/date";
 	import ChevronLeft from "lucide-svelte/icons/chevron-left";
 
 	export let data;
 
-	$: console.log(data);
+	$: if (dev) console.log(data);
 </script>
 
 <svelte:head>
 	<title>{data.metadata.title}</title>
-	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.metadata.title} />
+	<meta name="description" content={data.metadata.description} />
+	<meta property="og:description" content={data.metadata.description} />
+	<meta property="og:type" content="article" />
 </svelte:head>
 
 <main>
@@ -38,6 +41,7 @@
 	:global(article a) {
 		@apply border-b border-zinc-300 text-zinc-900 transition-all duration-200 hover:border-zinc-700;
 	}
+
 	:global(.dark article a) {
 		@apply border-b border-zinc-700 text-zinc-300 transition-all duration-200 hover:border-zinc-300;
 	}

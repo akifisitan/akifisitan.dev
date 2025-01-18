@@ -91,19 +91,17 @@ const projects = {
 		name: "Ovatify On The Cloud",
 		description:
 			"Ovatify, the social music platform, redesigned and adapted to run as a Cloud Native application.",
-		link: undefined,
+		link: "https://github.com/akifisitan/ovatify-on-the-cloud",
 		icon: "ovatify-on-the-cloud",
 	},
 } as const;
 
 export const projectSections = [
 	{
-		title: "Current Focus",
-		projects: [projects.healtrack, projects.ovatify_on_the_cloud],
-	},
-	{
 		title: "Course Projects",
 		projects: [
+			projects.healtrack,
+			projects.ovatify_on_the_cloud,
 			projects.ovatify,
 			projects.tictactoe_network,
 			projects.rhythms_of_code,
@@ -125,11 +123,9 @@ export const projectSections = [
 
 export const homeProjects = [
 	projects.ovatify,
-	projects.gpa_calc,
+	projects.ovatify_on_the_cloud,
 	projects.tictactoe_network,
 	projects.sveltere,
 	projects.real_estate_app_api,
-	projects.gmpbot,
-	projects.rhythms_of_code,
 	projects.unocord,
 ] as const;

@@ -13,10 +13,6 @@
 		<div class="spacer"></div>
 		<div class="flex items-center justify-center gap-4">
 			<a
-				href="/blog"
-				class="transition duration-200 hover:text-zinc-700 dark:hover:text-zinc-200">Blog</a
-			>
-			<a
 				href="/projects"
 				class="transition duration-200 hover:text-zinc-700 dark:hover:text-zinc-200"
 				>Projects</a
